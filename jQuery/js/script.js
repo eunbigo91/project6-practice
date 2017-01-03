@@ -1,8 +1,10 @@
 
+$(document).ready(function() {
 
-var $cat_img = $('#cat_image');
-var $clicks = $('#clicks');
-
-$cat_img.click(function(){
-    $clicks.text('clicked');
+    var counter = 0;
+    $(".count").append("<p id='clicks'>" + counter.toString() + "</p>");
+    $('#cat_image').click(function(){
+        counter += 1;
+        $('#clicks').text(counter.toString());
+    });
 });
