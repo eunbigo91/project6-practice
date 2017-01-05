@@ -35,21 +35,22 @@ function makeACatList(){
     $("#list").append("<ul class='cat_list'>"+toAdd+"</ul>");
 }
 
-function makeCatRows() {
-    var toAdd = "";
-    $.each(cats, function(catIndex, cat) {
-        toAdd += "<div class='cat'><div class='name'>" + cat.name + "</div><img src='" + cat.pic + "' class='cat_img'/><div id='" + catIndex.toString() + "' class='count'>" + cat.clicks.toString() + "</div></div>";
-    });
-    $("#main").append("<div class='row'>" + toAdd + "</div>");
-}
-
-$(document).ready(function() {
-    makeACatList();
-    makeCatRows();
+function displaySelectedCat(id){
+    $("#display").empty();
+    cat = cats[id];
+    var toDisplay = "<div class='name'>" + cat.name + "</div><img src='" + cat.pic + "' class='cat_img'/><div id='" + id.toString() + "' class='count'>" + cat.clicks.toString() + "</div>";
+    $("#display").append(toDisplay);
     $(".cat_img").click(function(obj) {
         var elem = obj.target.parentElement.childNodes[2];
-        console.log(elem);
         cats[elem.id].clicks += 1;
         $("#" + elem.id).text(cats[elem.id].clicks);
+    });
+}
+
+$(document).ready(function(){
+    makeACatList();
+    $(".cat").click(function(obj) {
+        id = cats.indexOf(cats.filter(function(a){ return a.name == obj.target.innerHTML; })[0]);
+        displaySelectedCat(id);
     });
 });
