@@ -27,6 +27,14 @@ var cats =[
     }
 ];
 
+function makeACatList(){
+    var toAdd = "";
+    $.each(cats, function(catIndex, cat) {
+        toAdd += "<li class='cat list'>"+cat.name+"</li>";
+    });
+    $("#list").append("<ul class='cat_list'>"+toAdd+"</ul>");
+}
+
 function makeCatRows() {
     var toAdd = "";
     $.each(cats, function(catIndex, cat) {
@@ -36,6 +44,7 @@ function makeCatRows() {
 }
 
 $(document).ready(function() {
+    makeACatList();
     makeCatRows();
     $(".cat_img").click(function(obj) {
         var elem = obj.target.parentElement.childNodes[2];
