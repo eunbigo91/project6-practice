@@ -40,8 +40,8 @@ function displaySelectedCat(id){
     cat = cats[id];
     var toDisplay = "<div class='name'>" + cat.name + "</div><img src='" + cat.pic + "' class='cat_img'/><div id='" + id.toString() + "' class='count'>" + cat.clicks.toString() + "</div>";
     $("#display").append(toDisplay);
-    $(".cat_img").click(function(obj) {
-        var elem = obj.target.parentElement.childNodes[2];
+    $(".cat_img").click(function(object) {
+        var elem = object.target.parentElement.childNodes[2];
         cats[elem.id].clicks += 1;
         $("#" + elem.id).text(cats[elem.id].clicks);
     });
@@ -50,7 +50,7 @@ function displaySelectedCat(id){
 $(document).ready(function(){
     makeACatList();
     $(".cat").click(function(obj) {
-        id = cats.indexOf(cats.filter(function(a){ return a.name == obj.target.innerHTML; })[0]);
+        id = cats.indexOf(cats.filter(function(a){ return a.name == obj.target.innerText; })[0]);
         displaySelectedCat(id);
     });
 });
