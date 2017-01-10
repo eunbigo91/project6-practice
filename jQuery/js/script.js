@@ -40,6 +40,7 @@ var octopus = {
 
         catListView.init();
         catView.init();
+        adminView.init();
     },
 
     getCurrentCat: function() {
@@ -57,6 +58,18 @@ var octopus = {
     incrementCounter: function() {
         model.currentCat.clicks++;
         catView.render();
+    },
+
+    editCat: function(name, pic, clicks) {
+        cat = model.currentCat;
+
+        cat.name = name;
+        cat.pic = pic;
+        cat.clicks = clicks;
+
+        catListView.init();
+        catView.render();
+        adminView.init();
     }
 };
 
@@ -75,16 +88,22 @@ var catView = {
         var currentCat = octopus.getCurrentCat();
         $('#cat-count').text(currentCat.clicks);
         $('#cat-name').text(currentCat.name);
-        $('#cat-img').attr("src", currentCat.pic);
+        $('#cat-img').attr('src', currentCat.pic);
     }
 };
 
 var catListView = {
-    init: function() {
+    init: function(){
+        this.render();
+    },
+
+    render: function() {
         var cats = octopus.getCats();
+        var list = '';
         $.each(cats, function(catIndex, cat) {
-            $("#cat-list").append("<li class='cat-index list'>"+cat.name+"</li>");
+            list += "<li class='cat-index list'>"+cat.name+"</li>"
         });
+        $('#cat-list').html(list);
 
         $('.cat-index').click(function(obj) {
             selectedCat = cats.filter(function(a){ return a.name == obj.target.innerHTML; })[0];
@@ -94,4 +113,33 @@ var catListView = {
     }
 };
 
+var adminView = {
+    init: function() {
+        $('#admin-button').click(function(){
+            adminView.render();
+        });
+    },
+
+    render: function() {
+        var cat = octopus.getCurrentCat();
+        $('#admin').empty();
+        var admin_form = '';
+        admin_form += "<form>Name: <input type='text' name='name'><br>Pic: <input type='text' name='pic'><br>Clicks: <input type='text' name='clicks'><div id='save'>Save</div><div id='cancel'>Cancel</div></form>";
+        $('#admin').append(admin_form);
+        $('input[name=name]').val(cat.name);
+        $('input[name=pic]').val(cat.pic);
+        $('input[name=clicks]').val(cat.clicks);
+
+        $('#save').click(function() {
+            name = $('input[name=name]').val();
+            pic = $('input[name=pic]').val();
+            clicks = $('input[name=clicks]').val();
+            octopus.editCat(name, pic, clicks);
+            $('#admin').empty();
+        });
+        $('#cancel').click(function() {
+            $('#admin').empty();
+        });
+    }
+};
 octopus.init();
