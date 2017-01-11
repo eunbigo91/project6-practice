@@ -3,7 +3,7 @@
  * attendance record if one is not found
  * within localStorage.
  */
-(function() {
+$(function() {
     if (!localStorage.attendance) {
         console.log('Creating attendance records...');
         function getRandom() {
