@@ -47,6 +47,7 @@ $(function(){
                 newNoteContent.val('');
                 e.preventDefault();
             });
+            console.log(octopus.getNotes());
             view.render();
         },
         render: function(){
