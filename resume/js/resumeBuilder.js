@@ -40,15 +40,16 @@ var model = {
         {
         "name" : "Seoul Women's University",
         "location" : "Seoul, South Korea",
-        "degree" : "Bachelor",
+        "degree" : "Bachelor of Science",
         "major" : ["Contents design", " Multimedia"],
         "dates" : "March 2010 - August 2015"
         },
         {
         "name" : "Dongsan High School",
         "location" : "Ansan, South Korea",
-        "dates" : "March 2007 - February 2010",
-        "degree" : "High School Diploma"
+        "degree" : "High School Diploma",
+        "major" : "General Studies",
+        "dates" : "March 2007 - February 2010"
         }
     ],
     onlineCourses: [
